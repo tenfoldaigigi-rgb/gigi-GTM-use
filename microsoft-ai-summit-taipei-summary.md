@@ -334,11 +334,104 @@ Comparing customers who see tangible results vs. those who don't:
 
 ---
 
+## 16. Microsoft 365 E7 - The Frontier Worker Suite
+
+**New product announcement — General Availability: May 1, 2026**
+
+Microsoft 365 E7 bundles three components into a single "Frontier Worker Suite":
+
+| Component | Description |
+|-----------|-------------|
+| **Microsoft 365 E5 + Entra Suite** | Secure productive work — the enterprise productivity and identity foundation |
+| **Microsoft 365 Copilot** | AI built for work — the AI assistant layer (Phase 1-2) |
+| **Microsoft Agent 365** | Control plane for agents — the governance and management layer for Phase 2-3 |
+
+**Key takeaway:** This is a significant packaging move. By bundling Copilot and Agent 365 into a single E7 SKU, Microsoft is making the path from Phase 1 (assistant) to Phase 3 (agents) a single purchase decision. This simplifies procurement and signals that Microsoft sees agents as the natural next step for every Copilot customer, not a separate product line.
+
+---
+
+## 17. Microsoft Agent 365 - The Control Plane for Agents
+
+**Three pillars of agent management:**
+
+| Pillar | Capability |
+|--------|-----------|
+| **Observe** | Monitor and manage agents in real time — visibility into what agents are doing across the organization |
+| **Govern** | Govern agents throughout their lifecycle — policies, permissions, and compliance controls from creation to retirement |
+| **Secure** | Protect all agents comprehensively — security controls to prevent data leakage, unauthorized access, and agent misuse |
+
+**Key takeaway:** As organizations move to Phase 2-3 with autonomous agents, governance becomes critical. Agent 365 addresses the #6 concern from the PwC study (Slide 14) — "Governance" — by providing a centralized control plane. This is Microsoft's answer to the enterprise question: "How do we let agents act autonomously while maintaining control?"
+
+---
+
+## 18. Call to Action
+
+The summit's closing slide distills everything into four action items:
+
+1. **Assess which Frontier phase you are** and apply AI to real use cases
+2. **Start exploring Agents** to support your work
+3. **Ensure successful adoption framework is in place**
+4. **Consider Agent 365** as Agent governance solution
+
+**Key takeaway:** The CTA perfectly mirrors the summit's structure — self-assess (Slide 4 framework), start with use cases (Slides 5-11 demos), invest in adoption (Slides 14-15 KSFs), and govern with Agent 365 (Slides 16-17 product). It's a concise sales motion in four bullets.
+
+---
+
+## 19. Agentic Retrieval Architecture
+
+**Technical deep-dive: How Microsoft's agentic retrieval system works**
+
+A 3-stage pipeline using both LLM and SLM (Small Language Model):
+
+### Stage 1: Intent Analysis & Query Planning (LLM)
+- Analyzes user intent and conversation history (意圖分析與對話歷史)
+- Selects data sources (資料源選擇)
+- Plans queries (查詢規劃)
+- Self-reflection (自我反思)
+
+### Stage 2: Multi-Source Retrieval & Ranking
+Queries are sent in parallel to multiple knowledge sources (知識來源):
+- **Search Indexes** — enterprise search
+- **OneLake (Fabric)** — data lakehouse
+- **SharePoint** — document management
+- **Bing Web Search** (Bing 網頁搜尋) — public web
+
+Each source returns results ranked via L2 scoring. An **SLM as a Judge** then classifies and evaluates (分類與評估) the results — if quality is insufficient, it triggers **iterative retrieval** (迭代檢索) back to Stage 1.
+
+### Stage 3: Synthesis (LLM)
+- Integrates results (整合結果)
+- Synthesizes the final answer (合成答案)
+- Logs activity (活動日誌)
+
+**Key takeaway:** This architecture reveals Microsoft's approach to grounding agents in enterprise data. The use of SLM as a judge for quality control (rather than relying solely on the LLM) is a cost-effective design pattern. The iterative retrieval loop ensures answer quality by allowing the system to self-correct. This is the technical foundation that makes Slides 11-12 (brand certification, Colleague Agent) possible.
+
+---
+
+## 20. Two Common Multi-Agent Collaboration Patterns
+
+**常見兩種 Multi-agent 協作方式 (Two common multi-agent collaboration methods)**
+
+| Pattern | Agent Orchestration | Workflow Orchestration |
+|---------|-------------------|----------------------|
+| **Control** | LLM dynamically decides the flow | Developer defines the flow via code |
+| **How it works** | LLM autonomously schedules tools and sub-agents; agents control their own task execution | Pre-defined code paths coordinate LLM, agents, and tools in a sequential pipeline |
+| **Flexibility** | High — adapts to novel situations | Lower — follows predetermined paths |
+| **Predictability** | Lower — LLM decides at runtime | High — deterministic flow with human checkpoints |
+| **Best for** | Complex, open-ended tasks requiring judgment | Repeatable business processes requiring consistency |
+
+### Chinese text translation:
+- **Agent Orchestration:** 由 LLM 動態決定控制流程，自主調度工具與子 Agent，自行掌控任務執行方式 (LLM dynamically decides the control flow, autonomously schedules tools and sub-agents, controls task execution independently)
+- **Workflow Orchestration:** 由開發者決定控制流程，透過預定義的程式碼路徑來協調 LLM、Agent 與工具的運作 (Developer decides the control flow, coordinates LLM, agents, and tools through pre-defined code paths)
+
+**Key takeaway:** This is the technical architecture slide that explains HOW to build the Phase 2-3 solutions shown earlier. The FAQ agent (Slide 9) and brand certification (Slide 11) are examples of **Workflow Orchestration** — predictable, repeatable processes. The Colleague Agent (Slide 12) is closer to **Agent Orchestration** — dynamically routing to the right system based on user intent. Organizations should choose the pattern based on their use case's need for flexibility vs. predictability.
+
+---
+
 ## Cross-Cutting Analysis
 
 ### The Full Summit Narrative Arc
 
-The summit builds a comprehensive case from problem to proof:
+The summit builds a comprehensive case from problem → framework → demos → proof → product → architecture:
 
 1. **The Problem** (Slides 1-2): Human labor is hitting capacity limits, especially in APAC. Investment in AI is accelerating across all business functions.
 2. **The Skills Shift** (Slide 3): AI literacy is the #1 skill, but human strengths (adaptability, conflict resolution, innovative thinking) remain critical.
@@ -349,6 +442,9 @@ The summit builds a comprehensive case from problem to proof:
 7. **Phase 3 in Production** (Slides 10, 12): Barclays' Colleague Agent is a real-world Phase 3 deployment connecting 7+ enterprise systems company-wide.
 8. **The Proof** (Slide 13): Microsoft's own internal results — measurable, statistically significant improvements across all 7 departments.
 9. **Success vs. Failure Factors** (Slides 14, 15): PwC research and real customer case studies reveal that use cases + data quality are table stakes, while senior management buy-in and peer-to-peer learning culture are the true differentiators.
+10. **The Product** (Slides 16, 17): Microsoft 365 E7 bundles everything into a single SKU with Agent 365 providing the governance control plane.
+11. **The Architecture** (Slides 19, 20): Technical deep-dives into agentic retrieval (multi-source, iterative, SLM-as-judge) and two multi-agent orchestration patterns.
+12. **The CTA** (Slide 18): Assess your phase, explore agents, build adoption frameworks, and govern with Agent 365.
 
 ### Key Implications for GTM Strategy
 
@@ -361,3 +457,6 @@ The summit builds a comprehensive case from problem to proof:
 - **Executive sponsorship is non-negotiable:** PwC data (Slide 14) shows senior management buy-in ranked #4 for success but #10 for failure. GTM should qualify deals on executive sponsorship and invest in C-suite engagement programs.
 - **AI literacy as a gating factor:** Ranked #4 reason for failure (Slide 14) and #1 in-demand skill (Slide 3). Training and enablement must be front-loaded in the customer journey.
 - **Barclays as the reference story:** The Colleague Agent (Slide 12) is the strongest proof point for Phase 3 — a named company, company-wide deployment, multi-system integration, taking real actions. Lead with this in enterprise conversations.
+- **E7 as the upsell path:** The new M365 E7 SKU (Slide 16) creates a natural upgrade motion from E5 → E7. Position E7 as the "Frontier Firm bundle" — everything needed to go from Phase 1 to Phase 3 in a single license. GA May 1, 2026 creates urgency for pipeline building now.
+- **Governance as a buying trigger:** Agent 365 (Slide 17) addresses the #1 concern enterprises have about autonomous agents — "how do we control them?" Lead with Observe/Govern/Secure messaging when selling to CISOs and compliance teams.
+- **Architecture patterns guide solution design:** Use the two orchestration patterns (Slide 20) to guide customer conversations — Workflow Orchestration for repeatable processes (finance, HR), Agent Orchestration for dynamic tasks (customer service, IT support). This helps customers start with predictable workflows and graduate to autonomous agents.
