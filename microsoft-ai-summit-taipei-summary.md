@@ -201,23 +201,163 @@ The foundation of "Generic use cases for all roles" remains, with Phase 2 role-s
 
 ---
 
+## 11. Brand Certification Judgement Upon New Product Launch
+
+**Demo: AI agent for product portfolio compliance**
+
+**The Problem:** Product portfolios have become very complex, making it extremely challenging to check brand certification criteria when launching new products.
+
+### How the Agent Works:
+1. A **Developer** wants to list a new product under "Brand X" (e.g., an ECO product line)
+2. The request goes to a **Product Portfolio Expert (Agent)** which consults the **Product Portfolio KB** (knowledge base with multiple data sources)
+3. The agent checks for duplication with existing product families and validates the developer's group membership
+4. **Result:** Approve or reject based on objective, multi-source data analysis
+
+### Impact:
+- **40x faster** approval time compared to manual review
+- Brings **objective judgement** by factoring in multiple data analyses and exceptional cases (based on past examples)
+- Replaces a previously manual, error-prone process that relied on human memory of complex portfolio rules
+
+**Key takeaway:** This is a powerful Phase 2/3 example showing how AI agents can replace complex decision-making workflows that previously required deep institutional knowledge — delivering both speed and consistency.
+
+---
+
+## 12. "Colleague Agent" - Connecting with Multiple Systems
+
+**Case Study: Barclays (Company-wide)**
+
+A single "Colleague Agent" that connects to multiple enterprise systems via Microsoft Graph and connectors to handle employee requests.
+
+### Example Interactions:
+
+| Employee Request | Agent Action | Systems Used |
+|-----------------|-------------|--------------|
+| "Can I receive gifts from customers? Will it violate compliance?" | Checks compliance policy, raises exception request on employee's behalf | Salesforce |
+| "What's the latest status for all projects I'm involved in?" | Summarizes all projects and status in table format | Jira |
+| "How many paid holidays do I still have? Request 5 days leave from next Monday" | Checks balance (8 days remaining, 3 must be used by end of March), raises leave request | Workday |
+
+### Connected Systems:
+Microsoft 365, ServiceNow, Workday, Salesforce, Jira, Coupa, Confluence — all accessed through connectors via Microsoft Graph.
+
+**Key insight:** Users can ask the Colleague Agent without thinking about which system they need to get information from — the agent routes to the right system automatically.
+
+**Key takeaway:** This is a real-world Phase 3 deployment at scale (Barclays, company-wide). The agent doesn't just answer questions — it **takes actions** (raises requests, submits leave). This is the "human-led, agent-operated" vision from Slide 4 in production.
+
+---
+
+## 13. Copilot's Early Impact at Microsoft (Internal Results)
+
+**Microsoft's own internal deployment results, statistically significant at 95% confidence:**
+
+| Department | Metric | Impact |
+|------------|--------|--------|
+| **Customer Service** | Faster case resolution | **11.5%** improvement |
+| **Sales** | Higher revenue per seller (one business group) | **9.4%** increase |
+| **Marketing** | Conversion rates on Azure.com | **21.5%** increase |
+| **Finance** | Case resolution time in cash collections | **60%** reduction |
+| **Legal** | External spend for regulatory work (projected 2025) | **5%** reduction expected |
+| **Human Resources** | Accuracy in answering questions via employee self-service | **42%** greater accuracy |
+| **IT** | Self-help success rate for employees | **36%** increase |
+
+### Sources (footnotes):
+1. Internal CSS experiment: 600 participants, Copilot Q&A function, Azure Core team, Nov-Dec 2023
+2. Internal Sales data: 687 sellers of M365 Copilot, Jan-June 2024, comparing regular vs. low-usage sellers
+3. Internal Marketing data: June-Sept 2024, conversion = initiating free account sign-up on Azure.com
+4. Internal Finance data: Oct 2023-Aug 2024
+5. Projected numbers from internal Legal team study: 58 participants, May 2024
+6. Internal HR experiment: 53 participants, Oct 2024
+7. Internal IT experiment: 48 participants, Sept 16-17, 2024
+
+**Key takeaway:** Microsoft is "eating its own cooking" — these are real, measured results across 7 departments. The Finance result (60% reduction) and HR accuracy result (42% improvement) are particularly compelling for enterprise buyers. All results are statistically significant at 95% CI.
+
+---
+
+## 14. Top 10 Reasons Why Successful vs Why Not Successful
+
+**Source:** PwC study on Copilot adoption outcomes
+
+Comparing customers who see tangible results vs. those who don't:
+
+| Rank | Successful Customers | Not Successful Customers |
+|------|---------------------|-------------------------|
+| 1 | **Had proper use case scenarios** | **Data quality** |
+| 2 | **Data quality** | **Had proper use case scenarios** |
+| 3 | Appropriate environment for use | Appropriate environment for use |
+| 4 | **Senior Management buy-in** (highlighted) | **AI Literacy** (highlighted) |
+| 5 | Clear Project Scope | Clear Project Scope |
+| 6 | Organizational Acceptance | Governance |
+| 7 | **AI Literacy** (highlighted) | Organizational Acceptance |
+| 8 | Appropriate Goal Setting | Appropriate Goal Setting |
+| 9 | Other Reasons | Other Reasons |
+| 10 | Governance | **Senior Management buy-in** (highlighted) |
+
+### Critical Insights (called out on the slide):
+- **"Having proper use cases" and "data quality"** are rated top 2 for BOTH success and failure — they are the most decisive factors
+- **AI literacy** was rated high as a reason for **failure** (#4) — meaning lack of AI literacy kills adoption
+- **Senior management buy-in** was rated high for **success** (#4) but dead last (#10) for failure — leadership engagement is a strong differentiator
+
+**Key takeaway:** The top 2 factors (use cases + data quality) are table stakes. The real differentiators are senior management buy-in (present in success, absent in failure) and AI literacy (absent in failure, present but lower-ranked in success). GTM should emphasize executive sponsorship programs and AI literacy training as critical enablers.
+
+---
+
+## 15. Learning from Customer Cases: KSF for Successful Adoption
+
+**Key Success Factors (KSF) from real customer deployments — Good vs. Bad patterns**
+
+### Good Pattern: Involving End Users Closely
+- Creating an environment to learn from each other casually
+- Encouraging self-learning, not too dependent on IT
+- Encouraging end users to proactively use and learn AI
+
+| Company | What They Did Right |
+|---------|-------------------|
+| **Sumitomo Corp** | 30-min hands-on training for 30+ people including Chairman and directs; regular newsletter with tips & tricks; assigned "Copilot Ambassador" in each division |
+| **JBS** | Distributed M365 Copilot licenses to everyone equally; monitored use cases by division, role, and job grade; conducted Hackathons after training, shared outcomes with everyone |
+| **Honda Motor** | Built dedicated portal to share information; created a Community for mutual learning among end users; shared know-how (e.g., effective prompting) |
+| **PERSOL Corp** | Created a Community through Viva Engage to facilitate sharing among end users |
+| **Company A** | Distributed M365 Copilot licenses to everyone — "Let not most curious users use the technology" |
+
+### Bad Pattern: Too Much Dependent on IT
+- Too formal; end users are not learning from each other
+- End users can only ask questions to IT; IT becomes too busy to handle Q&As from all end users
+
+| Company | What Went Wrong |
+|---------|----------------|
+| **Company A** | Stopped using/exploring because no one to ask casually, thus none |
+| **Company B** | Manual was distributed but never read or studied; no follow-ups |
+| **Company C** | Only one end-user training session but no follow-up |
+
+### Key Lesson:
+> Facilitate end users' self-learning and create an environment where end users can learn from each other. Build an environment to provide repeatable communication.
+
+**Key takeaway:** The #1 KSF is peer-to-peer learning culture, NOT top-down IT-driven rollout. The successful companies (Sumitomo, JBS, Honda) all invested in communities, ambassadors, and hackathons. The failed ones distributed licenses/manuals and walked away. GTM implication: selling licenses alone is not enough — adoption services, community building, and champion programs are critical to ensuring renewal.
+
+---
+
 ## Cross-Cutting Analysis
 
-### The Three-Phase Progression is the Central Narrative
+### The Full Summit Narrative Arc
 
-The summit's core message follows a clear arc:
+The summit builds a comprehensive case from problem to proof:
 
 1. **The Problem** (Slides 1-2): Human labor is hitting capacity limits, especially in APAC. Investment in AI is accelerating across all business functions.
 2. **The Skills Shift** (Slide 3): AI literacy is the #1 skill, but human strengths (adaptability, conflict resolution, innovative thinking) remain critical.
 3. **The Framework** (Slide 4): Microsoft's "Frontier Firm" model provides a 3-phase roadmap.
 4. **Phase 1 in Action** (Slide 5): Generic Copilot use cases across 7 departments.
 5. **Phase 2 in Action** (Slides 6, 7, 8): Role-specific scenarios with demos in quality data analysis and patent comparison.
-6. **Phase 2→3 Transition** (Slide 9): The FAQ agent demo shows the shift from tool-assisted to agent-driven workflows with human oversight.
-7. **Phase 3 Vision** (Slide 10): Fully autonomous AI systems operating across entire business processes.
+6. **Phase 2→3 Transition** (Slides 9, 11): The FAQ agent and brand certification demos show AI agents making decisions and taking actions with human oversight.
+7. **Phase 3 in Production** (Slides 10, 12): Barclays' Colleague Agent is a real-world Phase 3 deployment connecting 7+ enterprise systems company-wide.
+8. **The Proof** (Slide 13): Microsoft's own internal results — measurable, statistically significant improvements across all 7 departments.
+9. **Success vs. Failure Factors** (Slides 14, 15): PwC research and real customer case studies reveal that use cases + data quality are table stakes, while senior management buy-in and peer-to-peer learning culture are the true differentiators.
 
 ### Key Implications for GTM Strategy
 
 - **Taiwan paradox:** Only 47% of leaders feel productivity pressure, but 90% of workers feel overwhelmed — the highest in APAC. This gap represents a significant opportunity for AI adoption messaging.
 - **Phase-based selling:** Organizations are at different phases; GTM should meet customers where they are rather than pushing Phase 3 to Phase 1 companies.
-- **Human-in-the-loop is the bridge:** The FAQ demo (Slide 9) is the most practical example of how to transition from Phase 2 to Phase 3 — start with agent-drafted content, add human review, then gradually increase autonomy.
+- **Human-in-the-loop is the bridge:** The FAQ demo (Slide 9) and brand certification demo (Slide 11) are practical examples of how to transition from Phase 2 to Phase 3.
 - **Cross-functional AI:** The investment data shows broad interest (not concentrated in IT), meaning GTM should target line-of-business leaders, not just CIOs.
+- **Lead with proof points:** Microsoft's internal results (Slide 13) provide powerful ammunition — especially Finance (60% faster cash collections) and Marketing (21.5% conversion lift). Use these to build the business case.
+- **Sell adoption, not just licenses:** The KSF analysis (Slide 15) is unambiguous — companies that just distribute licenses and manuals fail. Successful deployments require champion programs, peer learning communities, hackathons, and sustained engagement. This means adoption services should be a core part of the GTM motion, not an afterthought.
+- **Executive sponsorship is non-negotiable:** PwC data (Slide 14) shows senior management buy-in ranked #4 for success but #10 for failure. GTM should qualify deals on executive sponsorship and invest in C-suite engagement programs.
+- **AI literacy as a gating factor:** Ranked #4 reason for failure (Slide 14) and #1 in-demand skill (Slide 3). Training and enablement must be front-loaded in the customer journey.
+- **Barclays as the reference story:** The Colleague Agent (Slide 12) is the strongest proof point for Phase 3 — a named company, company-wide deployment, multi-system integration, taking real actions. Lead with this in enterprise conversations.
