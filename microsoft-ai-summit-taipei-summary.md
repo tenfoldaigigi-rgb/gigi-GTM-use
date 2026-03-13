@@ -427,11 +427,152 @@ Each source returns results ranked via L2 scoring. An **SLM as a Judge** then cl
 
 ---
 
+## 21. Microsoft Agent Framework - Open Source Integration
+
+**透過開源框架將 Agents 整合至您現有的應用程式中 (Integrate agents into your existing applications through open-source frameworks)**
+
+The Microsoft Agent Framework supports multiple agent sources flowing into your application:
+
+| Agent Source | Description |
+|-------------|-------------|
+| **Foundry Agent** (multiple) | Agents built on Microsoft's Foundry platform |
+| **OpenAI Agent** | Agents built using OpenAI's agent framework |
+
+These agents connect to your app via:
+- **OpenAI SDK** — for OpenAI-native agents
+- **Foundry SDK** — for Microsoft Foundry agents
+- **Microsoft Agent Framework** — the unified runtime that orchestrates all agents
+
+**Key takeaway:** Microsoft is positioning the Agent Framework as an open, multi-vendor platform — not locked to Microsoft-only agents. By supporting OpenAI agents alongside Foundry agents, they lower the barrier for organizations already invested in OpenAI to adopt the Microsoft ecosystem. This is a strategic interoperability play.
+
+---
+
+## 22. Foundry Agent Service & Microsoft Agent Framework - Full Stack
+
+**The complete platform architecture for building and deploying agents:**
+
+### Platform Layers (bottom to top):
+
+| Layer | Components |
+|-------|-----------|
+| **Security, Compliance & Governance** (底層) | Virtual network (虛擬網路), data encryption (資料加密), AI labeling (AI 標籤), AI security rules (AI 安全準則), Entra ID, Observability (可觀測性) |
+| **Agent-first SDK, API, and UI** | Developer tools for building agents |
+| **Models** | OpenAI, Meta Llama, Grok, Anthropic, Mistral — multi-model support |
+| **Foundry IQ** | Agent Memory, Foundry IQ — intelligence and context layer |
+| **Foundry Tools** | MCP, OpenAPI, Logic Apps, A2A (Agent-to-Agent) — integration connectors |
+| **Agent Service** | Single prompt agents |
+| **Hosted Agents** | Multi-agent hosting |
+| **Multi-agent Workflows** | Multi-step, deterministic workflows |
+| **One-click Publishing** | Deploy directly to M365/A365 or third-party Agent Frameworks |
+
+### Key Observations:
+- **Multi-model:** Supports OpenAI, Llama, Grok, Anthropic, Mistral — not locked to a single LLM provider
+- **Standards-based:** Uses MCP (Model Context Protocol) and OpenAPI for tool integration, plus A2A for agent-to-agent communication
+- **One-click publishing** to M365/A365 bridges the gap between developer-built agents and business user consumption
+- **Foundry IQ** with Agent Memory provides persistent context across agent interactions
+
+**Key takeaway:** This is Microsoft's answer to the "build vs. buy" question. The Foundry Agent Service provides a full-stack platform that goes from model selection to production deployment in a single, governed environment. The multi-model and standards-based approach (MCP, OpenAPI, A2A) prevents vendor lock-in while keeping everything within Microsoft's security/governance umbrella.
+
+---
+
+## 23. Agent Trace & Observability - Risk Assessment Demo
+
+**每次與 Agent 對談，都是透明、可解釋 (Every conversation with an Agent is transparent and explainable)**
+
+A live demo showing the **Risk Assessment Review** trace for a financial services use case:
+
+### Agent Execution Trace (left panel):
+The trace shows a multi-agent workflow with full timing and token counts:
+
+1. **Risk_assessment** (LLM) — 20.07s, 6,911 tokens
+   - `invoke_agent: financial_services_auditor` — 3.05s, 1,833t
+     - `Retrieval: Knowledge` — 17.02s, 4,978t
+   - `invoke_agent: financial_services_auditor` — 5.12s, 1,244t
+     - `Retrieval: Memory` — 7.25s, 423t
+     - `Tool: audit_trace_inspector` — 0.53s, 55t
+     - `Tool: Bing_search` — 1.25s, 124t
+     - `LLM: gpt-4.1:summarize_options` — 2.05s, 642t
+   - `invoke_agent: fraud_analyst` — 7.51s, 2,032t
+     - `Retrieval: Knowledge` — 3.28s, 842t
+     - `Tool: transaction_pattern_analysis` — 0.29s, 153t
+     - `Tool: weights_biases` — 1.68s, 328t
+     - `LLM: phi-4:summarize_options` — 2.05s, 717t
+   - `invoke_agent: report_writer` — 4.38s, 1,702t
+     - `Retrieval: Knowledge` — 2.65, 628t
+     - `Tool: report_generator` — 0.36s, 58t
+     - `LLM` — 1.38s, 1,017t
+
+### Evaluation Metrics (right panel):
+- **Safety:** 1.2/5 (flagged as low — warning indicator)
+- **Coherence:** 5/5
+
+**Key takeaway:** This is the "Observe" pillar of Agent 365 (Slide 17) in action. Every agent interaction is fully traced — which sub-agents were invoked, what tools they used, how long each step took, and how many tokens were consumed. The evaluation metrics (Safety, Coherence) provide automated quality checks. This level of transparency is critical for regulated industries (financial services, healthcare) where explainability and audit trails are mandatory.
+
+---
+
+## 24. Agent Evaluation Dashboard - Financial Agent
+
+**A comprehensive evaluation framework for testing and comparing agent performance:**
+
+### Evaluation Details:
+- **Name:** Financial_agent_evaluation
+- **Type:** Agent evaluation
+- **Tags:** Criteria match, Relevance, Groundedness
+- **Created:** Aug 7, 2025 4:25 PM
+- **Created by:** Su He
+
+### Evaluation Metrics (across multiple runs):
+
+| Run | Target | Version | Status | Duration | Tokens | Similarity | Coherence | String Check | Safety |
+|-----|--------|---------|--------|----------|--------|------------|-----------|-------------|--------|
+| evalrun_293... | financial_ser... | v2 | Success | 8.54s | 463/392 | 96% (192/205) | 96% (192/205) | 96% (192/205) | 45% (98/205) |
+| evalrun_ff2bu | contoso-bot... | v5 | Success | 6.23s | 121/857 | 96% (192/205) | 32% (65/205) | 45% (98/205) | 77% (154/205) |
+| evalrun_00w... | agent_pt-22... | v4 | Success | 6.23s | 121/857 | 96% (192/205) | 45% (98/205) | 77% (154/205) | 77% (154/205) |
+| evalrun_bud... | agent_portot... | v1 | Success | 7.75s | 312/252 | 96% (192/205) | 96% (192/205) | 96% (192/205) | 8% (17/205) |
+| evalrun_328... | contoso_a/e... | v3 | Success | 6.23s | 121/857 | 96% (192/205) | 32% (65/205) | 45% (98/205) | 77% (154/205) |
+
+### Features:
+- **Compare runs** — side-by-side comparison across versions
+- **Cluster analysis** — visual map of clustered issues from evaluation runs
+- **Export results** — for reporting and compliance
+
+**Key takeaway:** This is the enterprise-grade evaluation tooling that makes agent governance practical. Teams can compare agent versions across multiple quality dimensions (Similarity, Coherence, String Check, Safety), identify regressions, and make data-driven decisions about which agent version to deploy. The Safety metric variations (8% to 96%) show why systematic evaluation is essential before production deployment.
+
+---
+
+## 25. Agents in Production - Agent 365 Deployment
+
+**Agents 進入正式環境 (Agents entering production environment)**
+
+Three pillars of Agent 365 production deployment:
+
+### 1. Unified Management (納入統一管理)
+- All agents from different building platforms get assigned an **Agent ID**
+- Spans agents built across different platforms (橫跨不同 Agent 建置平台的各類 Agent)
+- Includes M365, Copilot Studio, custom-built, and third-party agents — all under one management plane
+
+### 2. Secure Deployment & Operations (安全部署與維運)
+Powered by Microsoft's security stack:
+- **Entra ID** — identity and access management for agents
+- **Defender** — threat protection for agent activities
+- **Purview** — data governance and compliance
+
+### 3. Enable Human-Agent Collaboration (啟動人機協作)
+Agents connect to enterprise surfaces:
+- **Productivity apps** (生產力應用程式) — Office apps
+- **Enterprise storage** (企業儲存空間) — data stores
+- **Collaboration apps** (協作應用程式) — Teams, etc.
+- **Semantic index** (語義索引) — enterprise knowledge graph
+
+**Key takeaway:** This slide completes the Agent 365 story (building on Slide 17). It shows that Agent 365 isn't just monitoring — it's the full production lifecycle: register agents with IDs, secure them with the same Entra/Defender/Purview stack used for human identities, then connect them to enterprise surfaces. The fact that agents get their own identity (Agent ID) via Entra ID is significant — it means agents are treated as first-class enterprise entities with the same security controls as human employees.
+
+---
+
 ## Cross-Cutting Analysis
 
 ### The Full Summit Narrative Arc
 
-The summit builds a comprehensive case from problem → framework → demos → proof → product → architecture:
+The summit builds a comprehensive case from problem → framework → demos → proof → product → architecture → developer platform:
 
 1. **The Problem** (Slides 1-2): Human labor is hitting capacity limits, especially in APAC. Investment in AI is accelerating across all business functions.
 2. **The Skills Shift** (Slide 3): AI literacy is the #1 skill, but human strengths (adaptability, conflict resolution, innovative thinking) remain critical.
@@ -442,9 +583,11 @@ The summit builds a comprehensive case from problem → framework → demos → 
 7. **Phase 3 in Production** (Slides 10, 12): Barclays' Colleague Agent is a real-world Phase 3 deployment connecting 7+ enterprise systems company-wide.
 8. **The Proof** (Slide 13): Microsoft's own internal results — measurable, statistically significant improvements across all 7 departments.
 9. **Success vs. Failure Factors** (Slides 14, 15): PwC research and real customer case studies reveal that use cases + data quality are table stakes, while senior management buy-in and peer-to-peer learning culture are the true differentiators.
-10. **The Product** (Slides 16, 17): Microsoft 365 E7 bundles everything into a single SKU with Agent 365 providing the governance control plane.
-11. **The Architecture** (Slides 19, 20): Technical deep-dives into agentic retrieval (multi-source, iterative, SLM-as-judge) and two multi-agent orchestration patterns.
-12. **The CTA** (Slide 18): Assess your phase, explore agents, build adoption frameworks, and govern with Agent 365.
+10. **The Product** (Slides 16, 17, 25): Microsoft 365 E7 bundles everything into a single SKU; Agent 365 provides unified management, secure deployment (Entra ID/Defender/Purview), and human-agent collaboration.
+11. **The Developer Platform** (Slides 21, 22): Microsoft Agent Framework supports multi-vendor agents (Foundry + OpenAI); Foundry Agent Service provides the full stack from multi-model selection (OpenAI, Llama, Anthropic, Mistral) to one-click publishing.
+12. **The Architecture** (Slides 19, 20): Agentic retrieval (multi-source, iterative, SLM-as-judge) and two multi-agent orchestration patterns.
+13. **Observability & Evaluation** (Slides 23, 24): Full agent tracing with timing/token counts, plus systematic evaluation dashboards for comparing agent versions across quality dimensions.
+14. **The CTA** (Slide 18): Assess your phase, explore agents, build adoption frameworks, and govern with Agent 365.
 
 ### Key Implications for GTM Strategy
 
@@ -458,5 +601,7 @@ The summit builds a comprehensive case from problem → framework → demos → 
 - **AI literacy as a gating factor:** Ranked #4 reason for failure (Slide 14) and #1 in-demand skill (Slide 3). Training and enablement must be front-loaded in the customer journey.
 - **Barclays as the reference story:** The Colleague Agent (Slide 12) is the strongest proof point for Phase 3 — a named company, company-wide deployment, multi-system integration, taking real actions. Lead with this in enterprise conversations.
 - **E7 as the upsell path:** The new M365 E7 SKU (Slide 16) creates a natural upgrade motion from E5 → E7. Position E7 as the "Frontier Firm bundle" — everything needed to go from Phase 1 to Phase 3 in a single license. GA May 1, 2026 creates urgency for pipeline building now.
-- **Governance as a buying trigger:** Agent 365 (Slide 17) addresses the #1 concern enterprises have about autonomous agents — "how do we control them?" Lead with Observe/Govern/Secure messaging when selling to CISOs and compliance teams.
-- **Architecture patterns guide solution design:** Use the two orchestration patterns (Slide 20) to guide customer conversations — Workflow Orchestration for repeatable processes (finance, HR), Agent Orchestration for dynamic tasks (customer service, IT support). This helps customers start with predictable workflows and graduate to autonomous agents.
+- **Governance as a buying trigger:** Agent 365 (Slides 17, 25) addresses the #1 concern enterprises have about autonomous agents — "how do we control them?" Agents get their own Entra ID identity and are protected by Defender/Purview — the same security stack as human employees. Lead with this for CISOs and compliance teams.
+- **Architecture patterns guide solution design:** Use the two orchestration patterns (Slide 20) to guide customer conversations — Workflow Orchestration for repeatable processes (finance, HR), Agent Orchestration for dynamic tasks (customer service, IT support).
+- **Open platform reduces vendor lock-in objections:** The Agent Framework (Slides 21, 22) supports OpenAI agents, multi-model (including Anthropic, Mistral, Llama), and standards-based tools (MCP, OpenAPI, A2A). Use this to counter "walled garden" objections — customers can bring their existing AI investments into the Microsoft ecosystem.
+- **Observability sells to regulated industries:** The agent tracing (Slide 23) and evaluation dashboard (Slide 24) are differentiators for financial services, healthcare, and government buyers who need audit trails and explainability. Every agent action is logged with timing, tokens, and quality scores — exactly what compliance teams require.
