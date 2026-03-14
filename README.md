@@ -1,6 +1,6 @@
 # Slack Sales Buddy — Tenfold AI
 
-An AI-powered sales assistant that lives in your Slack workspace. Powered by Claude and grounded in Tenfold AI's GTM knowledge base.
+An AI-powered sales assistant that lives in your Slack workspace. Powered by Claude and grounded in Tenfold AI's GTM knowledge base — loaded directly from Google Drive.
 
 ## What It Does
 
@@ -55,7 +55,43 @@ An AI-powered sales assistant that lives in your Slack workspace. Powered by Cla
 1. Go to [console.anthropic.com](https://console.anthropic.com)
 2. Create an API key → save as `ANTHROPIC_API_KEY`
 
-### 3. Configure Environment
+### 3. Connect Google Drive
+
+The bot reads your sales knowledge base directly from a Google Drive folder — no need to download files.
+
+**Create a Google Cloud Service Account:**
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project (or use an existing one)
+3. Enable the **Google Drive API**:
+   - Go to **APIs & Services** → **Library**
+   - Search "Google Drive API" → **Enable**
+4. Create a **Service Account**:
+   - Go to **APIs & Services** → **Credentials**
+   - Click **Create Credentials** → **Service Account**
+   - Name it `sales-buddy-drive` → **Create and Continue**
+   - Skip role assignment → **Done**
+5. Create a key for the service account:
+   - Click the service account → **Keys** tab → **Add Key** → **Create new key**
+   - Choose **JSON** → Download the file
+   - Save it as `service-account.json` in the project root (it's already in `.gitignore`)
+
+**Share your Drive folder with the service account:**
+
+1. Copy the service account email (looks like `sales-buddy-drive@your-project.iam.gserviceaccount.com`)
+2. Go to your Google Drive folder
+3. Click **Share** → paste the service account email → set to **Viewer** → **Send**
+
+**Get the folder ID:**
+
+The folder ID is the last part of the Drive URL:
+```
+https://drive.google.com/drive/folders/1j-3uWjNXmhRc6tIaS9QH-eQQ73QQCMDB
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                        This is your GOOGLE_DRIVE_FOLDER_ID
+```
+
+### 4. Configure Environment
 
 ```bash
 cp .env.example .env
@@ -63,20 +99,36 @@ cp .env.example .env
 #   SLACK_BOT_TOKEN=xoxb-...
 #   SLACK_APP_TOKEN=xapp-...
 #   ANTHROPIC_API_KEY=sk-ant-...
+#   GOOGLE_DRIVE_FOLDER_ID=1j-3uWjNXmhRc6tIaS9QH-eQQ73QQCMDB
+#   GOOGLE_SERVICE_ACCOUNT_FILE=./service-account.json
 ```
 
-### 4. Install & Run
+### 5. Install & Run
 
 ```bash
 pip install -r requirements.txt
 python bot.py
 ```
 
-The bot connects via Socket Mode (no public URL needed) and will log `⚡️ Bolt app is running!` when ready.
+The bot connects via Socket Mode (no public URL needed) and will log `Bolt app is running!` when ready.
 
-## Adding Knowledge
+## Supported File Types from Google Drive
 
-Drop any `.md` files into the repo root — the bot automatically loads all markdown files (except README.md) as its knowledge base at startup. Add sales playbooks, competitive analyses, or product docs to make the bot smarter.
+| File Type | How It's Processed |
+|-----------|-------------------|
+| Google Docs | Exported as plain text |
+| Google Slides | Exported as plain text |
+| Google Sheets | Exported as CSV |
+| PDFs | Text extracted via PyPDF2 |
+| Markdown (.md) | Read as-is |
+| Plain text (.txt) | Read as-is |
+| Word (.docx) | Exported via Drive as text |
+| PowerPoint (.pptx) | Exported via Drive as text |
+| Excel (.xlsx) | Exported via Drive as CSV |
+
+The bot also loads any `.md` files from the repo root as supplemental knowledge.
+
+Subfolders in the Drive folder are scanned recursively.
 
 ## Architecture
 
@@ -85,9 +137,18 @@ Slack (mentions, DMs, /command)
     ↓
 bot.py (Slack Bolt + Socket Mode)
     ↓
-knowledge_base.py (loads .md files from repo)
+knowledge_base.py
+    ├── Google Drive API (service account auth)
+    │   └── Reads all docs/slides/PDFs from shared folder
+    └── Local .md files (fallback/supplement)
     ↓
 Claude API (Anthropic) with system prompt + knowledge context
     ↓
 Response back to Slack thread
 ```
+
+## Adding Knowledge
+
+**Via Google Drive (recommended):** Just add files to the shared Drive folder. Restart the bot to pick up new content.
+
+**Via local files:** Drop `.md` files into the repo root — they're loaded automatically alongside Drive content.

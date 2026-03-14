@@ -10,6 +10,9 @@ venv/
 # Environment
 .env
 
+# Google service account credentials
+service-account.json
+
 # IDE
 .vscode/
 .idea/
